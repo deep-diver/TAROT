@@ -1,0 +1,41 @@
+🚀 restore_app_state called with: /var/folders/8n/v_6zwyqj7k95qgwc7m_rljlm0000gn/T/tmpshxqck5p.json
+📁 Checking if state file exists: /var/folders/8n/v_6zwyqj7k95qgwc7m_rljlm0000gn/T/tmpshxqck5p.json
+📖 Reading state file...
+✅ Loaded state: {'selected_file': {'path': '/Users/deep-diver/Developers/dstack-dev/8x80GB.dev.dstack.yml', 'name': '8x80GB.dev.dstackdd.yml', 'config_type': 'task', 'is_global_config': False}, 'active_tab': 'preview', 'expanded_nodes': [], 'root_path': '/Users/deep-diver/Developers/dstack-dev', 'timestamp': '2025-05-30 15:39:25.088915'}
+🔄 Restoring app state from 2025-05-30 15:39:25.088915
+🔄 Refreshing file tree...
+⏰ Scheduling file selection in 0.3s for: {'path': '/Users/deep-diver/Developers/dstack-dev/8x80GB.dev.dstack.yml', 'name': '8x80GB.dev.dstackdd.yml', 'config_type': 'task', 'is_global_config': False}
+⏰ Scheduling tab restoration in 0.5s for: preview
+🗑️ Cleaning up state file: /var/folders/8n/v_6zwyqj7k95qgwc7m_rljlm0000gn/T/tmpshxqck5p.json
+✅ State file cleaned up
+🔍 DEBUG: Tree has 3 top-level nodes
+🎯 Looking for file: 8x80GB.dev.dstackdd.yml at /Users/deep-diver/Developers/dstack-dev/8x80GB.dev.dstack.yml
+🌳 Tree structure:
+📋 Node: dstack YAML Files
+   Children: 3
+  📋 Node: 🌐 dstack Global Config
+     Path: /Users/deep-diver/.dstack/config.yml
+     Name: config.yml
+     Children: 0
+  📋 Node: 📁 Default (0)
+     Children: 0
+  📋 Node: 📁 Defaults (1)
+     Children: 1
+    📋 Node: 8x80GB.dev.dstackdd.yml
+       Path: /Users/deep-diver/Developers/dstack-dev/8x80GB.dev.dstack.yml
+       Name: 8x80GB.dev.dstackdd.yml
+       Children: 0
+🔍 Starting file selection process...
+🎯 Looking for file: 8x80GB.dev.dstackdd.yml at /Users/deep-diver/Developers/dstack-dev/8x80GB.dev.dstack.yml
+    ✅ Found exact path match: /Users/deep-diver/Developers/dstack-dev/8x80GB.dev.dstack.yml
+📂 Expanded: dstack YAML Files
+📂 Expanded: 📁 Defaults (1)
+✅ Successfully restored and expanded to: 8x80GB.dev.dstackdd.yml
+🎯 Selecting file after expansion: /Users/deep-diver/Developers/dstack-dev/8x80GB.dev.dstack.yml
+✅ Set current_file to: 8x80GB.dev.dstackdd.yml
+✅ Selected node using select_node
+✅ Scrolled to node
+✅ Refreshed tree widget
+✅ Posted FileSelected message
+✅ Updated preview for: 8x80GB.dev.dstackdd.yml
+✅ Focused tree widget

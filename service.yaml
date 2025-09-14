@@ -1,0 +1,30 @@
+type: service
+name: my-service
+
+# Docker image to use
+image: python:3.11
+
+# Port to expose
+port: 8000
+
+# Commands to run
+commands:
+  - python -m http.server 8000
+
+# Working directory
+working_dir: .
+
+# Resources
+resources:
+  cpu: 2
+  memory: 4GB
+  disk: 10GB
+
+# Environment variables
+env:
+  - PYTHONPATH=/workspace
+
+# Health check
+# health_check:
+#   path: /health
+#   timeout: 30s

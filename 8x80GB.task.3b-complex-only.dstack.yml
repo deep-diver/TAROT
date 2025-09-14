@@ -1,0 +1,65 @@
+type: task
+name: qwen25-3b-ccrl-complex-only-1e
+
+python: "3.11"
+
+env:
+  - HF_TOKEN
+  - HUGGINGFACE_TOKEN
+  - WANDB_API_KEY
+  - E2B_API_KEY
+
+commands:
+  - apt-get update && apt-get install -y wget gnupg
+  - wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-keyring_1.1-1_all.deb
+  - dpkg -i cuda-keyring_1.1-1_all.deb
+  - rm -f /etc/apt/sources.list.d/cuda*.list
+  - wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
+  - mv cuda-ubuntu2004.pin /etc/apt/preferences.d/cuda-repository-pin-600
+  - wget https://developer.download.nvidia.com/compute/cuda/12.4.0/local_installers/cuda-repo-ubuntu2004-12-4-local_12.4.0-550.54.14-1_amd64.deb
+  - dpkg -i cuda-repo-ubuntu2004-12-4-local_12.4.0-550.54.14-1_amd64.deb
+  - cp /var/cuda-repo-ubuntu2004-12-4-local/cuda-*-keyring.gpg /usr/share/keyrings/
+  - apt-get update
+  - apt-get install -y cuda-toolkit-12-4
+  - echo 'export PATH=/usr/local/cuda-12.4/bin:$PATH' >> ~/.bashrc
+  - echo 'export LD_LIBRARY_PATH=/usr/local/cuda-12.4/lib64:$LD_LIBRARY_PATH' >> ~/.bashrc
+  - source ~/.bashrc
+  - nvcc --version
+
+  - curl -LsSf https://astral.sh/uv/install.sh | sh
+  - source ~/.bashrc
+
+  - uv venv openr1 --python 3.11 && source openr1/bin/activate && uv pip install --upgrade pip
+  - uv pip install vllm==0.8.4
+  - uv pip install setuptools && uv pip install flash-attn --no-build-isolation
+
+  - git clone https://github.com/deep-diver/open-r1.git
+  - cp custom_3b_complex_only.yaml open-r1/recipes/custom.yaml
+  - cat open-r1/recipes/custom.yaml
+  - cp custom_rewards_complex_only.py open-r1/src/open_r1/code_rewards.py
+  - cat open-r1/src/open_r1/code_rewards.py
+  - cd open-r1
+  - echo "E2B_API_KEY=$E2B_API_KEY" >> ".env"
+  - cat .env
+  - GIT_LFS_SKIP_SMUDGE=1 uv pip install -e ".[dev]"
+
+  - git clone https://github.com/deep-diver/trl.git
+  - cd trl
+  - uv pip install .
+
+  - nohup bash -c 'CUDA_VISIBLE_DEVICES=0 trl vllm-serve --model Qwen/Qwen2.5-3B-Instruct' > vllm.log 2>&1 &
+  - sleep 60
+  - cd ..
+  - CUDA_VISIBLE_DEVICES=1,2,3,4,5,6,7 ACCELERATE_LOG_LEVEL=info accelerate launch --config_file recipes/accelerate_configs/zero2.yaml --num_processes=7 src/open_r1/grpo.py --config recipes/custom.yaml
+
+resources:
+  gpu: 80GB:8
+  disk: 600GB
+  shm_size: 2GB
+
+# backends:
+#   - vastai
+#   - runpod
+#   - lambda
+#   - datacrunch
+
