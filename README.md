@@ -1,6 +1,6 @@
-# TAROT: TEST-DRIVEN AND CAPABILITY-ADAPTIVE CURRICULUM REINFORCEMENT FINE-TUNING FOR CODE GENERATION
+# TAROT
 
-This the official repository of "TAROT: TEST-DRIVEN AND CAPABILITY-ADAPTIVE CURRICULUM REINFORCEMENT FINE-TUNING FOR CODE GENERATION". We provide scripts that are used to generate 4-tiered test suite of dataset, fine-tune models and evlaluate the models from the paper. Also, all the fine-tuned models and dataset can be found in Hugging Face.
+We provide scripts that are used to generate 4-tiered test suite of dataset, fine-tune models and evlaluate the models from the paper. Also, all the fine-tuned models and dataset can be found in Hugging Face.
 
 ## Generating 4-tiered test suite of dataset
 
